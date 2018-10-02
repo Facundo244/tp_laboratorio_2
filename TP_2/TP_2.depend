@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1538451869 source:c:\users\facundo\desktop\tp_laboratorio_2\tp_2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Biblioteca.h"
+
+1538452651 source:c:\users\facundo\desktop\tp_laboratorio_2\tp_2\biblioteca.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"Biblioteca.h"
+
+1538453880 c:\users\facundo\desktop\tp_laboratorio_2\tp_2\biblioteca.h
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+
