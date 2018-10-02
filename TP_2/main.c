@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Biblioteca.h"
+#include "arrayEmployees.h"
 
 int main()
 {
     sEmployee listadoEmployee[TAM];
-    inicializarArrayIlogicamente(listadoEmployee);
-    menu(listadoEmployee);
+    initEmployees(listadoEmployee , TAM);
+    menuEmployees(listadoEmployee , TAM);
+
 }

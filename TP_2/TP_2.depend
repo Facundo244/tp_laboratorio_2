@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1538451869 source:c:\users\facundo\desktop\tp_laboratorio_2\tp_2\main.c
+1538503902 source:c:\users\facundo\desktop\tp_laboratorio_2\tp_2\main.c
 	<stdio.h>
 	<stdlib.h>
-	"Biblioteca.h"
+	"arrayEmployees.h"
 
 1538452651 source:c:\users\facundo\desktop\tp_laboratorio_2\tp_2\biblioteca.c
 	<stdio.h>
@@ -17,4 +17,18 @@
 	<ctype.h>
 	<stdio.h>
 	<stdlib.h>
+
+1538508548 c:\users\facundo\desktop\tp_laboratorio_2\tp_2\arrayemployees.h
+	<string.h>
+	<conio.h>
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+
+1538508321 source:c:\users\facundo\desktop\tp_laboratorio_2\tp_2\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"arrayEmployees.h"
 
