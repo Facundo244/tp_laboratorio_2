@@ -49,8 +49,8 @@ void menuEmployees(sEmployee listadoEmployee[] , int tam)
 
             case 3:
                 system("cls");
-                findEmployeeById(listadoEmployee , tam);
-                employeeRemoveById(listadoEmployee , tam );
+                IdAuto();
+                employeeRemoveById(listadoEmployee, tam );
                 break;
             case 4:
                 system("cls");
@@ -67,6 +67,49 @@ void menuEmployees(sEmployee listadoEmployee[] , int tam)
     while(opcion!=5);
     {
     }
+
+}
+
+void employeeRemoveById(sEmployee listadoEmployee[], int tam)
+{
+    int bandera =0;
+    int acceder;
+    int idaux;
+
+    printf("\n Ingrese el ID del empleado a remover ");
+    scanf("%d" , & idaux);
+
+    for(int i=0; i<tam ; i++)
+    {
+        if(listadoEmployee[i].isEmpty!=VACIO && idaux == listadoEmployee[i].id)
+        {
+            bandera=1;
+            printf("\n ¿ Desea dar de baja permanentemente a este empleado ? \n (s/n)");
+            acceder=getch();
+            if(acceder == 's')
+            {
+                printf("   ----------------------------------------------    \n");
+                printf("            Removiendo datos del Empleado...         \n");
+                printf("   ----------------------------------------------    \n");
+                system("pause");
+                system("cls");
+                printf("   ----------------------------------------------   \n");
+                printf("            Se removio Exitosamente!!                \n");
+                printf("   ----------------------------------------------    \n");
+                listadoEmployee[i].estado=VACIO;
+                break;
+            }
+            else if (acceder != 's')
+            {
+                printf("\n Precione la tecla s para salir al menu \n");
+            }
+        }
+    }
+    if(bandera==0)
+    {
+        printf("\n No se encuentra este ID en la base de datos \n");
+    }
+
 
 }
 
@@ -171,15 +214,14 @@ int mostrarListadoEmployees(sEmployee listadoEmployee[] , int tam)
 }
 
 
-int findEmployeeById(sEmployee listadoEmployee[] , int tam)
+int findEmployeeById(sEmployee listadoEmployee[] , int tam , int id)
 {
-    int id = 0;
-    int i;
     int resultado = -1;
+    int i;
 
     for(i = 0 ; i < tam; i++)
     {
-        if(listadoEmployee[i].isEmpty == OCUPADO && listadoEmployee[i].id == id)
+        if(listadoEmployee[i].id == id && listadoEmployee[i].estado == 1)
         {
             resultado = i;
             break;
@@ -188,43 +230,6 @@ int findEmployeeById(sEmployee listadoEmployee[] , int tam)
     return resultado;
 }
 
-/*void employeeRemoveById(eEmpleado empleados[], int tam)
-{
-
-    int id;
-    int indice;
-    char borrar;
-
-    printf("Ingrese id: ");
-    scanf("%d", &id);
-
-    indice = findEmployeeById(empleados, tam);
-
-    if( indice == -1)
-    {
-        printf("No hay ningun empleado con el id %d\n", id);
-    }
-    else
-    {
-        mostrarEmpleado(empleados[indice]);
-
-        printf("\nConfirma borrado?: ");
-        fflush(stdin);
-        scanf("%c", &borrar);
-        if(borrar != 's')
-        {
-            printf("Borrado cancelado\n\n");
-        }
-        else
-        {
-            empleados[indice].isEmpty = 0;
-            printf("Se ha eliminado el empleado\n\n");
-        }
-        system("pause");
-    }
-
-}
-*/
 int IdAuto(void)
 {
     static int IDEmpleado=0;
@@ -241,6 +246,7 @@ void employeeModify(sEmployee listadoEmployee[] , int tam)
     int opcion;
     char validar;
 
+    mostrarListadoEmployees(listadoEmployee , tam);
     printf("Ingrese el ID del empleado: ");
     scanf("%d" , &idaux);
 
@@ -248,8 +254,7 @@ void employeeModify(sEmployee listadoEmployee[] , int tam)
     {
         if(idaux == listadoEmployee[i].id)
         {
-            printf("%10s %10s %10s %15s %12s \n\n", "ID Employee" , "Nombre" ,  "Apellido" ,  "Salario" , "Sector");
-            mostrarUnEmploye(listadoEmployee[i]);
+            mostrarListadoEmployees(listadoEmployee , tam);
             printf("Desea modificar algun dato ?  s / n");
             validar=getch();
             if(validar == 's')
@@ -283,8 +288,7 @@ void employeeModify(sEmployee listadoEmployee[] , int tam)
                         printf("Ingrese nuevo nombre: ");
                         gets(listadoEmployee[i].name);
                         printf("\n\n");
-                        printf("%10s %5s %10s %15s %12s \n\n", "ID Employee --" , " -- Nombre --" ,  " -- Apellido --" ,  " -- Salario --" , " -- Sector --" );
-                        mostrarUnEmploye(listadoEmployee[i]);
+                        mostrarListadoEmployees(listadoEmployee , tam);
                         system("pause");
                         break;
                     case 2:
@@ -293,8 +297,7 @@ void employeeModify(sEmployee listadoEmployee[] , int tam)
                         printf("Ingrese nuevo apellido: ");
                         gets(listadoEmployee[i].lastName);
                         printf("\n\n");
-                        printf("%10s %10s %10s %15s %12s \n\n", "ID Employee --" , " -- Nombre --" ,  " -- Apellido --" ,  " -- Salario --" , " -- Sector --");
-                        mostrarUnEmploye(listadoEmployee[i]);
+                        mostrarListadoEmployees(listadoEmployee , tam);
                         system("pause");
                         break;
                     case 3:
@@ -303,8 +306,7 @@ void employeeModify(sEmployee listadoEmployee[] , int tam)
                         printf("Ingrese nuevo salario: ");
                         scanf("%f" , &listadoEmployee[i].salary);
                         printf("\n\n");
-                        printf("%10s %10s %10s %15s %12s \n\n", "ID Employee --" , " -- Nombre --" ,  " -- Apellido --" ,  " -- Salario --" , " -- Sector --");
-                        mostrarUnEmploye(listadoEmployee[i]);
+                        mostrarListadoEmployees(listadoEmployee , tam);
                         system("pause");
                         break;
                     case 4:
@@ -313,8 +315,7 @@ void employeeModify(sEmployee listadoEmployee[] , int tam)
                         printf("Ingrese nuevo sector: ");
                         scanf("%s" , &listadoEmployee[i].sector);
                         printf("\n\n");
-                        printf("%10s %10s %10s %15s %12s \n\n","ID Employee --" , " -- Nombre --" ,  " -- Apellido --" ,  " -- Salario --" , " -- Sector --");
-                        mostrarUnEmploye(listadoEmployee[i]);
+                        mostrarListadoEmployees(listadoEmployee , tam);
                         system("pause");
                         break;
                     case 5:
@@ -335,9 +336,6 @@ void alphabeticallyOrderedByLastName(sEmployee listadoEmployee[] , int tam)
     int j;
     sEmployee aux;
 
-    printf(" ----------------------------------------------\n");
-    printf("            Ordenando Alfabeticamente...       \n");
-    printf(" ----------------------------------------------\n");
 
     system("cls");
     for(i=0; i<tam-1; i++)
@@ -352,6 +350,11 @@ void alphabeticallyOrderedByLastName(sEmployee listadoEmployee[] , int tam)
                 }
         }
     }
+
+    printf(" ----------------------------------------------\n");
+    printf("            Ordenando Alfabeticamente...       \n");
+    printf(" ----------------------------------------------\n");
+
     for(i=0 ; i<tam ; i++)
     {
         if(listadoEmployee[i].isEmpty == OCUPADO)
@@ -369,10 +372,6 @@ void alphabeticallyOrderedByName(sEmployee listadoEmployee[] , int tam)
     int j;
     sEmployee aux;
 
-    printf(" ----------------------------------------------\n");
-    printf("            Ordenando Alfabeticamente...       \n");
-    printf(" ----------------------------------------------\n");
-
     system("cls");
     for(i=0; i<tam-1; i++)
     {
@@ -386,6 +385,11 @@ void alphabeticallyOrderedByName(sEmployee listadoEmployee[] , int tam)
                 }
         }
     }
+
+    printf(" ----------------------------------------------\n");
+    printf("            Ordenando Alfabeticamente...       \n");
+    printf(" ----------------------------------------------\n");
+
     for(i=0 ; i<tam ; i++)
     {
         if(listadoEmployee[i].isEmpty == OCUPADO)
@@ -403,10 +407,6 @@ void alphabeticallyOrderedBySector(sEmployee listadoEmployee[] , int tam)
     int j;
     sEmployee aux;
 
-    printf(" ----------------------------------------------\n");
-    printf("            Ordenando Alfabeticamente...       \n");
-    printf(" ----------------------------------------------\n");
-
     system("cls");
     for(i=0; i<tam-1; i++)
     {
@@ -420,6 +420,10 @@ void alphabeticallyOrderedBySector(sEmployee listadoEmployee[] , int tam)
                 }
         }
     }
+
+    printf(" ----------------------------------------------\n");
+    printf("            Ordenando Alfabeticamente...       \n");
+    printf(" ----------------------------------------------\n");
     for(i=0 ; i<tam ; i++)
     {
         if(listadoEmployee[i].isEmpty == OCUPADO)
@@ -430,3 +434,6 @@ void alphabeticallyOrderedBySector(sEmployee listadoEmployee[] , int tam)
     }
 
 }
+
+
+
